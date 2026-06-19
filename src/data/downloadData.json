@@ -1,0 +1,223 @@
+[
+  {
+    "id": "p5",
+    "name": "P5 (분석 뷰어 포함)",
+    "nameEn": "P5 (Includes Analysis Viewer)",
+    "descriptionKo": "P5 장비 구동 및 PC용 데이터 분석/뷰어(DSViewer) 소프트웨어입니다. B3 / T3 장비 데이터 분석을 위한 PC용 분석 뷰어가 필요하신 분도 이 P5 프로그램을 다운로드하시면 됩니다.",
+    "descriptionEn": "P5 instrument control and PC data analysis/viewer (DSViewer) software. If you need a PC analysis viewer for B3/T3 data, download this Windows version.",
+    "version": "v3.0.5",
+    "releaseDate": "2026.04.02",
+    "os": "Windows 10 / 11 (64-bit)",
+    "fileSize": "38.4 MB",
+    "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_5(2026-04-02-10-14).exe",
+    "manualUrl": "/assets/docs/DSViewer_Manual_v2.pdf",
+    "installationStepsKo": [
+      "최신 설치 파일(.exe 또는 .zip)을 PC에 다운로드합니다.",
+      "다운로드한 파일의 압축을 완전히 해제합니다.",
+      "setup.exe 파일을 실행하여 설치를 진행합니다."
+    ],
+    "installationStepsEn": [
+      "Download the latest installer (.exe or .zip) to your Windows PC.",
+      "Extract the downloaded zip archive completely.",
+      "Run the setup.exe file to install."
+    ],
+    "changelogKo": [
+      {
+        "version": "v3.0.5",
+        "date": "2026.04.02",
+        "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_5(2026-04-02-10-14).exe",
+        "notes": [
+          "대용량 A-scan 로우 데이터 연산 처리 정밀도 최적화",
+          "Wedge Delay 보정 및 분석 피드백 정밀도 개선"
+        ]
+      },
+      {
+        "version": "v3.0.4",
+        "date": "2026.02.03",
+        "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_4(2026-02-03-14-00).exe",
+        "notes": [
+          "오프라인 모드 데이터 분석 처리 안정화",
+          "장비 데이터 동기화 네트워크 버그 수정"
+        ]
+      },
+      {
+        "version": "v3.0.3",
+        "date": "2026.01.21",
+        "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_3(2026-01-21-13-45).exe",
+        "notes": [
+          "3.0 대규모 업데이트 최초 릴리스 (UI/UX 전면 개편)",
+          "TOFD 모듈 탑재 및 분석 차트 뷰어 업그레이드"
+        ]
+      }
+    ],
+    "changelogEn": [
+      {
+        "version": "v3.0.5",
+        "date": "2026.04.02",
+        "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_5(2026-04-02-10-14).exe",
+        "notes": [
+          "Optimized heavy volume A-scan raw data computation throughput",
+          "Improved Wedge Delay calibration and feedback precision"
+        ]
+      },
+      {
+        "version": "v3.0.4",
+        "date": "2026.02.03",
+        "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_4(2026-02-03-14-00).exe",
+        "notes": [
+          "Stabilized offline mode data analysis performance",
+          "Fixed instrument data sync network packet buffer leak"
+        ]
+      },
+      {
+        "version": "v3.0.3",
+        "date": "2026.01.21",
+        "downloadUrl": "/files/dsvision_win/DSVision_setup_Ver_3_0_3(2026-01-21-13-45).exe",
+        "notes": [
+          "Initial 3.0 major release with complete UI/UX overhaul",
+          "Integrated TOFD modules and upgraded analysis chart viewers"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b3t3",
+    "name": "B3 / T3",
+    "nameEn": "B3 / T3",
+    "descriptionKo": "B3 및 T3 장비 본체 내부의 구동 및 데이터 수집 제어 시스템 업데이트 프로그램입니다. 장비 기기 본체에 직접 업로드하여 업데이트를 진행합니다.",
+    "descriptionEn": "System and data acquisition update files for B3 and T3 instrument mainframes. These files must be directly loaded onto the instrument to update.",
+    "version": "v3.0.5",
+    "releaseDate": "2026.04.02",
+    "os": "Linux Embedded OS (B3/T3)",
+    "fileSize": "53.6 MB",
+    "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_5_2026-04-02-10-14.tar.xz",
+    "manualUrl": "/assets/docs/B3_T3_Update_Guide_v1.0.pdf",
+    "installationStepsKo": [
+      "리눅스 시스템 업데이트 파일(.zip 또는 .tar.gz)을 다운로드합니다.",
+      "다운로드한 파일을 압축 해제하지 않고 USB 메모리에 그대로 저장합니다.",
+      "USB 메모리를 B3/T3 장비 본체의 USB 포트에 꽂은 뒤, 화면 메뉴의 '설정 -> 시스템 업데이트'를 실행합니다.",
+      "※ 이 파일은 장비 기기 전용 리눅스 프로그램으로, 일반 PC에는 설치할 수 없습니다."
+    ],
+    "installationStepsEn": [
+      "Download the Linux system update file (.zip or .tar.gz).",
+      "Do NOT extract it; save the archive file directly onto a USB flash drive.",
+      "Insert the USB flash drive into the B3/T3 instrument USB port, then navigate to 'Settings -> System Update' on the screen.",
+      "※ This file is compiled for Linux Embedded OS on the instrument. It cannot be installed on a Windows PC."
+    ],
+    "changelogKo": [
+      {
+        "version": "v3.0.5",
+        "date": "2026.04.02",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_5_2026-04-02-10-14.tar.xz",
+        "notes": [
+          "A-scan 대용량 데이터 로깅 스트리밍 최적화",
+          "Wedge Delay 정밀도 오정렬 보정 알고리즘 추가"
+        ]
+      },
+      {
+        "version": "v3.0.4",
+        "date": "2026.02.03",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_4_2026-02-03-14-00.tar.xz",
+        "notes": [
+          "소켓 버퍼 제어 메모리 안정화 및 데이터 패킷 누수 해결"
+        ]
+      },
+      {
+        "version": "v3.0.3",
+        "date": "2026.01.21",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_3_2026-01-21-13-45.tar.xz",
+        "notes": [
+          "T3 장비 TOFD 신호 수집 커널 최적화 완료"
+        ]
+      },
+      {
+        "version": "v3.0.2",
+        "date": "2026.01.07",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_2_2026-01-07-10-17.tar.xz",
+        "notes": [
+          "임베디드 리눅스 시스템 호환성 개선 버전 최초 릴리스"
+        ]
+      }
+    ],
+    "changelogEn": [
+      {
+        "version": "v3.0.5",
+        "date": "2026.04.02",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_5_2026-04-02-10-14.tar.xz",
+        "notes": [
+          "Optimized A-scan high-volume data logging streaming",
+          "Added Wedge Delay calibration alignment algorithm adjustments"
+        ]
+      },
+      {
+        "version": "v3.0.4",
+        "date": "2026.02.03",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_4_2026-02-03-14-00.tar.xz",
+        "notes": [
+          "Stabilized socket buffer control memory and resolved packet data leakage"
+        ]
+      },
+      {
+        "version": "v3.0.3",
+        "date": "2026.01.21",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_3_2026-01-21-13-45.tar.xz",
+        "notes": [
+          "Optimized TOFD signal acquisition kernel modules for T3"
+        ]
+      },
+      {
+        "version": "v3.0.2",
+        "date": "2026.01.07",
+        "downloadUrl": "/files/dsvision_linux/DSVision_CM5_Ver_3_0_2_2026-01-07-10-17.tar.xz",
+        "notes": [
+          "Initial release for embedded Linux system compatibility improvements"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dsk",
+    "name": "DSK (SDK)",
+    "nameEn": "DSK (SDK)",
+    "descriptionKo": "성산연구소의 초음파 장비 데이터를 실시간으로 수신하여 고유의 연구 및 응용 분석 알고리즘을 개발할 수 있도록 제공하는 개발자용 소프트웨어 키트(SDK) 및 샘플 코드입니다.",
+    "descriptionEn": "Developer software development kit (SDK) library and sample code set designed to receive ultrasonic data from SEONGSANLAB instruments for custom research and analysis algorithms.",
+    "version": "v2.3.1",
+    "releaseDate": "2024.10.10",
+    "os": "Windows 10 / 11",
+    "fileSize": "8.8 MB",
+    "downloadUrl": "/files/dsk/DSK_Setup_Ver_2_3_1(2024-10-10-17-10).exe",
+    "manualUrl": "/assets/docs/DSK_Developer_Guide_v1.0.pdf",
+    "installationStepsKo": [
+      "DSK 라이브러리 파일(.zip)을 개발용 PC에 다운로드합니다.",
+      "다운로드한 파일의 압축을 해제합니다.",
+      "폴더 내의 README 문서 및 C# 예제 프로젝트 코드를 참조하여 응용 소프트웨어를 개발합니다."
+    ],
+    "installationStepsEn": [
+      "Download the DSK library file (.zip) to your development PC.",
+      "Extract the downloaded zip archive.",
+      "Refer to the README documentation and C# sample project codes in the folder to build your custom software."
+    ],
+    "changelogKo": [
+      {
+        "version": "v2.3.1",
+        "date": "2024.10.10",
+        "downloadUrl": "/files/dsk/DSK_Setup_Ver_2_3_1(2024-10-10-17-10).exe",
+        "notes": [
+          "C# 래퍼 예제 프로젝트 연동성 강화",
+          "R5 OEM 보드 다중 제어 API 속도 개선 및 동기화 최적화"
+        ]
+      }
+    ],
+    "changelogEn": [
+      {
+        "version": "v2.3.1",
+        "date": "2024.10.10",
+        "downloadUrl": "/files/dsk/DSK_Setup_Ver_2_3_1(2024-10-10-17-10).exe",
+        "notes": [
+          "Enhanced integration robustness for C# wrapper example projects",
+          "Optimized execution throughput for R5 OEM multi-board sync controls"
+        ]
+      }
+    ]
+  }
+]

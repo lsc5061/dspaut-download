@@ -1,0 +1,530 @@
+---
+// src/pages/ko/index.astro
+import Layout from '../../layouts/Layout.astro';
+import downloadData from '../../data/downloadData.json';
+---
+
+<Layout 
+  title="자료실 및 다운로드 | (주)성산연구소 (SEONGSANLAB)" 
+  description="성산연구소의 고성능 초음파 비파괴검사(NDT) 소프트웨어 및 개발 키트(SDK)의 최신 설치 파일과 업데이트 정보를 한눈에 확인하고 다운로드할 수 있습니다." 
+  lang="ko"
+>
+  <div class="download-portal">
+    <!-- Header Hero Section -->
+    <section class="portal-hero">
+      <div class="content-container">
+        <h1 class="portal-title animate-fade-in">소프트웨어 자료실</h1>
+        <p class="portal-subtitle animate-fade-in" style="animation-delay: 0.1s;">
+          성산연구소 DSPAUT 장비 구동용 시스템 패치 및 분석 뷰어 소프트웨어의 최신 릴리스 파일을 배포합니다.
+        </p>
+      </div>
+    </section>
+
+
+
+    <!-- Tab Content Panels -->
+    <section class="panels-section animate-fade-in" style="animation-delay: 0.3s;">
+      <div class="content-container">
+        {downloadData.map((data, index) => (
+          <div 
+            class={`tab-panel ${index === 0 ? '' : 'hidden'}`}
+            id={`panel-${data.id}`}
+          >
+            <!-- 2-Column Core Section: Download Card (Left) vs. Installation Steps (Right) -->
+            <div class="tab-grid">
+              
+              <!-- Left Column: Main Download Info -->
+              <div class="panel-left">
+                <div class="main-card">
+                  <div class="card-header">
+                    <span class="product-badge">최신 버전</span>
+                    <span class="version-tag">{data.version}</span>
+                  </div>
+                  <h2 class="product-name">{data.name}</h2>
+                  <p class="product-desc">{data.descriptionKo}</p>
+                  
+                  {data.id === 'p5' && (
+                    <div class="notice-box">
+                      <span class="notice-icon">ℹ️</span>
+                      <p class="notice-text">
+                        <strong>B3 / T3 장비 사용자 안내:</strong> B3 및 T3 장비의 데이터를 PC에서 열어보고 분석하기 위한 PC용 분석 뷰어(DSViewer)가 필요하신 고객님도 이 P5 프로그램을 다운로드하시면 됩니다.
+                      </p>
+                    </div>
+                  )}
+
+                  <div class="spec-grid">
+                    <div class="spec-item">
+                      <span class="spec-label">업데이트 일자</span>
+                      <span class="spec-value">{data.releaseDate}</span>
+                    </div>
+                    <div class="spec-item">
+                      <span class="spec-label">지원 운영체제</span>
+                      <span class="spec-value">{data.os}</span>
+                    </div>
+                    <div class="spec-item">
+                      <span class="spec-label">파일 크기</span>
+                      <span class="spec-value">{data.fileSize}</span>
+                    </div>
+                  </div>
+
+                  <div class="button-group">
+                    <a href={data.downloadUrl} class="primary-download-btn">
+                      <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                      </svg>
+                      <span>설치 파일 다운로드</span>
+                    </a>
+                    {data.manualUrl && (
+                      <a href={data.manualUrl} target="_blank" rel="noopener noreferrer" class="manual-download-btn">
+                        <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <span>설치 매뉴얼 보기 (PDF)</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Installation Guide -->
+              <div class="panel-right">
+                <div class="guide-card">
+                  <h3 class="guide-heading">프로그램 설치 방법</h3>
+                  <div class="steps-container">
+                    {data.installationStepsKo.map((step, idx) => (
+                      <div class="step-row">
+                        <span class="step-num">{idx + 1}</span>
+                        <p class="step-text">{step}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Section: Release History & Changelogs Table -->
+            <div class="changelog-section">
+              <h3 class="changelog-heading">버전 히스토리 및 릴리스 노트</h3>
+              <div class="table-container">
+                <table class="changelog-table">
+                  <thead>
+                    <tr>
+                      <th>버전</th>
+                      <th>업데이트 일자</th>
+                      <th>수정 및 개선 사항</th>
+                      <th>설치 파일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.changelogKo.map((item) => (
+                      <tr>
+                        <td class="col-version font-display">{item.version}</td>
+                        <td class="col-date">{item.date}</td>
+                        <td class="col-notes">
+                          <ul class="changelog-notes-list">
+                            {item.notes.map((note) => (
+                              <li>{note}</li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td class="col-action">
+                          {item.downloadUrl && (
+                            <a href={item.downloadUrl} class="table-dl-link">
+                              다운로드
+                            </a>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .download-portal {
+    background-color: var(--color-body-bg);
+    min-height: 100%;
+    padding-bottom: 96px;
+  }
+
+  /* Portal Hero Area */
+  .portal-hero {
+    background-color: var(--color-secondary-bg);
+    padding: 64px 0 48px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .portal-title {
+    font-size: 38px;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+  }
+
+  .portal-subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+
+
+  /* Tab Panel Content */
+  .panels-section {
+    padding: 48px 0;
+  }
+
+  .tab-panel.hidden {
+    display: none;
+  }
+
+  /* 2-Column Grid Layout */
+  .tab-grid {
+    display: grid;
+    grid-template-cols: 6fr 5fr;
+    gap: 32px;
+    margin-bottom: 48px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 900px) {
+    .tab-grid {
+      grid-template-cols: 1fr;
+      gap: 24px;
+    }
+  }
+
+  /* Left Column: Product Card */
+  .panel-left {
+    height: 100%;
+  }
+
+  .main-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .product-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    background-color: rgba(0, 103, 184, 0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .version-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    background-color: var(--color-secondary-bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+  }
+
+  .product-name {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+  }
+
+  .product-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .notice-box {
+    background-color: rgba(0, 103, 184, 0.03);
+    border-left: 3px solid var(--color-primary);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .notice-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .notice-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-cols: repeat(3, 1fr);
+    gap: 16px;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 0;
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 485px) {
+    .spec-grid {
+      grid-template-cols: 1fr;
+      gap: 12px;
+      padding: 16px 0;
+    }
+  }
+
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .spec-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+  }
+
+  .spec-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+  }
+
+  @media (max-width: 580px) {
+    .button-group {
+      flex-direction: column;
+    }
+  }
+
+  .primary-download-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 103, 184, 0.15);
+  }
+
+  .primary-download-btn:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  .manual-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--color-card-bg);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .manual-download-btn:hover {
+    color: var(--color-text-primary);
+    border-color: #cbd5e1;
+    background-color: var(--color-secondary-bg);
+  }
+
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Right Column: Guide Card */
+  .panel-right {
+    height: 100%;
+  }
+
+  .guide-card {
+    background-color: var(--color-secondary-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 32px;
+    height: 100%;
+  }
+
+  .guide-heading {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+  }
+
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step-row {
+    display: flex;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .step-num {
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  /* Changelog Section */
+  .changelog-section {
+    margin-top: 56px;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  }
+
+  .changelog-heading {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    margin-bottom: 20px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .changelog-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .changelog-table th, .changelog-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .changelog-table th {
+    background-color: var(--color-secondary-bg);
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .changelog-table tbody tr:hover {
+    background-color: var(--color-secondary-bg);
+  }
+
+  .col-version {
+    font-weight: 700;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .col-date {
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .col-notes {
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .changelog-notes-list {
+    list-style-type: disc;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .col-action {
+    text-align: right;
+  }
+
+  .table-dl-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: var(--color-card-bg);
+    transition: all 0.2s ease;
+  }
+
+  .table-dl-link:hover {
+    color: #ffffff;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+</style>
+
+

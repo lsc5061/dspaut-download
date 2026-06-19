@@ -1,0 +1,389 @@
+---
+// src/components/DownloadCard.astro
+interface ChangelogItem {
+  version: string;
+  date: string;
+  notes: string[];
+  downloadUrl?: string;
+}
+
+interface Props {
+  lang?: string;
+  name: string;
+  description: string;
+  version: string;
+  releaseDate: string;
+  os: string;
+  fileSize: string;
+  downloadUrl: string;
+  changelog?: ChangelogItem[];
+}
+
+const { lang = 'en', name, description, version, releaseDate, os, fileSize, downloadUrl, changelog = [] } = Astro.props;
+const isKo = lang === 'ko';
+---
+
+<div class="download-card">
+  <!-- Dynamic Glow Element -->
+  <div class="card-glow"></div>
+
+  <div class="card-inner">
+    <!-- Header: Icon & Version Badge -->
+    <div class="card-header">
+      <div class="icon-wrapper">
+        <svg class="download-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+        </svg>
+      </div>
+      <span class="version-badge">{version}</span>
+    </div>
+
+    <!-- Info Block -->
+    <h3 class="card-title">{name}</h3>
+    <p class="card-description">{description}</p>
+
+    <!-- Metadata Details -->
+    <div class="metadata-section">
+      <div class="metadata-row">
+        <span class="metadata-label">{isKo ? "업데이트 일자" : "Release Date"}</span>
+        <span class="metadata-value font-mono">{releaseDate}</span>
+      </div>
+      <div class="metadata-row">
+        <span class="metadata-label">{isKo ? "지원 운영체제" : "Supported OS"}</span>
+        <span class="metadata-value">{os}</span>
+      </div>
+      <div class="metadata-row">
+        <span class="metadata-label">{isKo ? "파일 크기" : "File Size"}</span>
+        <span class="metadata-value font-mono">{fileSize}</span>
+      </div>
+    </div>
+
+    <!-- Version History Accordion -->
+    {changelog && changelog.length > 0 && (
+      <details class="changelog-details">
+        <summary class="changelog-summary">
+          <span>{isKo ? "버전 히스토리 및 릴리스 노트" : "Version History & Release Notes"}</span>
+          <svg class="accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </summary>
+        <div class="changelog-content">
+          {changelog.map((item) => (
+            <div class="changelog-item">
+              <div class="changelog-item-header">
+                <div class="version-date">
+                  <span class="changelog-version">{item.version}</span>
+                  <span class="changelog-date">{item.date}</span>
+                </div>
+                {item.downloadUrl && (
+                  <a href={item.downloadUrl} class="changelog-download-link">
+                    <span>{isKo ? "다운로드" : "Download"}</span>
+                    <span class="arrow-symbol">➔</span>
+                  </a>
+                )}
+              </div>
+              <ul class="changelog-notes">
+                {item.notes.map((note) => (
+                  <li>{note}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </details>
+    )}
+  </div>
+
+  <!-- Download Button -->
+  <a href={downloadUrl} class="download-action-btn">
+    <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+    </svg>
+    <span>{isKo ? "설치 파일 다운로드" : "Download Installer"}</span>
+  </a>
+</div>
+
+<style>
+  .download-card {
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 32px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .download-card:hover {
+    border-color: rgba(0, 229, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .card-glow {
+    position: absolute;
+    right: -64px;
+    bottom: -64px;
+    width: 144px;
+    height: 144px;
+    background-color: rgba(0, 229, 255, 0.05);
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .download-card:hover .card-glow {
+    background-color: rgba(0, 229, 255, 0.1);
+  }
+
+  .card-inner {
+    flex-grow: 1;
+    margin-bottom: 24px;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .icon-wrapper {
+    padding: 12px;
+    background-color: #030712;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  .download-card:hover .icon-wrapper {
+    border-color: rgba(0, 229, 255, 0.3);
+  }
+
+  .download-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-primary-cyan);
+    display: block;
+  }
+
+  .version-badge {
+    font-size: 12px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-primary-cyan);
+    background-color: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 9999px;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: #ffffff;
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+  }
+
+  .download-card:hover .card-title {
+    color: var(--color-primary-cyan);
+  }
+
+  .card-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+
+  .metadata-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .metadata-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .metadata-label {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .metadata-value {
+    color: #e2e8f0;
+  }
+
+  .font-mono {
+    font-family: monospace;
+  }
+
+  /* Changelog Accordion styling */
+  .changelog-details {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 20px;
+  }
+
+  .changelog-summary {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(0, 229, 255, 0.85);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    user-select: none;
+  }
+
+  .changelog-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .changelog-summary:hover {
+    color: var(--color-primary-cyan);
+  }
+
+  .accordion-arrow {
+    width: 16px;
+    height: 16px;
+    color: #64748b;
+    transition: transform 0.3s ease;
+  }
+
+  .changelog-details[open] .accordion-arrow {
+    transform: rotate(180deg);
+    color: var(--color-primary-cyan);
+  }
+
+  .changelog-content {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  /* Custom Scrollbar for Accordion Content */
+  .changelog-content::-webkit-scrollbar {
+    width: 4px;
+  }
+  .changelog-content::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 9999px;
+  }
+  .changelog-content::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-cyan);
+  }
+
+  .changelog-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 12px;
+  }
+
+  .changelog-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .changelog-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .version-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .changelog-version {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e2e8f0;
+  }
+
+  .changelog-date {
+    font-size: 11px;
+    color: #64748b;
+    font-family: monospace;
+  }
+
+  .changelog-download-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary-cyan);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    transition: color 0.2s ease;
+  }
+
+  .changelog-download-link:hover {
+    color: #00cbe6;
+    text-decoration: underline;
+  }
+
+  .arrow-symbol {
+    font-size: 8px;
+  }
+
+  .changelog-notes {
+    list-style-type: disc;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Main Action Button */
+  .download-action-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, var(--color-primary-cyan) 0%, var(--color-electric-blue) 100%);
+    color: #030712;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.15);
+  }
+
+  .download-action-btn:hover {
+    background: linear-gradient(90deg, #00cbe6 0%, #2563eb 100%);
+    box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+</style>

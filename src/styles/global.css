@@ -1,0 +1,101 @@
+:root {
+  --color-primary: #0067b8;
+  --color-primary-hover: #005293;
+  --color-body-bg: #ffffff;
+  --color-secondary-bg: #f8f9fa;
+  --color-card-bg: #ffffff;
+  --color-border: #e9ecef;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a5568;
+  --color-input-bg: rgba(243, 244, 246, 0.6);
+  --color-navbar-bg: rgba(255, 255, 255, 0.8);
+  
+  --font-sans: "Inter", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Noto Sans KR", sans-serif;
+  --font-display: "Outfit", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Noto Sans KR", sans-serif;
+}
+
+[data-theme="dark"] {
+  --color-body-bg: #111317;
+  --color-secondary-bg: #1b1e23;
+  --color-card-bg: #1b1e23;
+  --color-border: #22262d;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9cb3c9;
+  --color-input-bg: rgba(30, 41, 59, 0.6);
+  --color-navbar-bg: rgba(17, 19, 23, 0.8);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-body-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Scrollbar Styling (Stripe style) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Utility Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Common Layout Elements */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hidden {
+  display: none !important;
+}

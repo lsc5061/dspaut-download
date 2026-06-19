@@ -1,0 +1,582 @@
+---
+// src/components/Header.astro
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const isKo = lang === 'ko';
+
+const supportUrl = import.meta.env.PUBLIC_SUPPORT_URL || "https://support.dspaut.com";
+
+const homePath = isKo ? '/ko/' : '/';
+
+// Language switcher URL
+const pathname = Astro.url.pathname;
+const enHref = isKo 
+  ? (pathname.replace(/^\/ko/, '') || '/') 
+  : pathname;
+const koHref = isKo 
+  ? pathname 
+  : `/ko${pathname === '/' ? '' : pathname}`;
+---
+
+<header class="site-header" data-layout-header>
+  <div class="header-container">
+    <!-- Logo -->
+    <div class="logo-area">
+      <a href={homePath} class="logo-link">
+        <img src="/favicon.png" alt="DSPAUT Logo" class="logo-img" />
+        <span class="logo-text">DSPAUT</span>
+        <span class="logo-subtext">Downloads</span>
+      </a>
+    </div>
+    
+    <!-- Central Product Tabs (Embedded directly into center menu area) -->
+    <nav class="desktop-nav header-tabs">
+      <button class="nav-tab-btn active" data-tab-target="p5">P5 (Includes Analysis Viewer)</button>
+      <button class="nav-tab-btn" data-tab-target="b3t3">B3 / T3</button>
+      <button class="nav-tab-btn" data-tab-target="dsk">DSK (SDK)</button>
+    </nav>
+    
+    <!-- Right side controls (Search bar, Language Switch Pill, Theme Toggle) -->
+    <div class="header-actions">
+      <!-- Search Input -->
+      <form action={`${supportUrl}${isKo ? '/ko/manual/' : '/manual/'}`} method="GET" class="search-form-container">
+        <div class="search-input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input 
+            type="text" 
+            name="q"
+            placeholder={isKo ? "검색..." : "Search..."}
+            class="search-input"
+          />
+          <kbd class="kbd-shortcut">/</kbd>
+        </div>
+      </form>
+
+      <!-- Language Switch (Pill Button Group) -->
+      <div class="lang-toggle-pill">
+        <a href={enHref} class={`lang-pill-btn ${!isKo ? 'active' : ''}`}>EN</a>
+        <a href={koHref} class={`lang-pill-btn ${isKo ? 'active' : ''}`}>KO</a>
+      </div>
+
+      <!-- Dark Mode Toggle Button -->
+      <button id="header-theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+        <!-- Sun icon (shown in dark mode) -->
+        <svg id="header-sun-icon" class="theme-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+        </svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg id="header-moon-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile menu toggle button -->
+    <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+      <svg class="burger-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Panel -->
+  <div class="mobile-menu-panel hidden">
+    <nav class="mobile-nav">
+      <!-- Mobile product tabs -->
+      <button class="mobile-nav-tab-btn active" data-tab-target="p5">P5 (Includes Analysis Viewer)</button>
+      <button class="mobile-nav-tab-btn" data-tab-target="b3t3">B3 / T3</button>
+      <button class="mobile-nav-tab-btn" data-tab-target="dsk">DSK (SDK)</button>
+      
+      <div class="mobile-actions-divider"></div>
+      
+      <!-- Mobile Search -->
+      <form action={`${supportUrl}${isKo ? '/ko/manual/' : '/manual/'}`} method="GET" class="search-form-container" style="width: 100%; margin-bottom: 12px;">
+        <div class="search-input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input 
+            type="text" 
+            name="q"
+            placeholder={isKo ? "검색..." : "Search..."}
+            class="search-input"
+            style="width: 100%;"
+          />
+        </div>
+      </form>
+
+      <div class="mobile-actions">
+        <!-- Lang switcher -->
+        <div class="lang-toggle-pill">
+          <a href={enHref} class={`lang-pill-btn ${!isKo ? 'active' : ''}`}>EN</a>
+          <a href={koHref} class={`lang-pill-btn ${isKo ? 'active' : ''}`}>KO</a>
+        </div>
+
+        <!-- Theme switch -->
+        <button id="mobile-theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg id="mobile-sun-icon" class="theme-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+          <svg id="mobile-moon-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--color-navbar-bg);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .header-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 48px; /* Matches px-12 (48px) */
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 1024px) {
+    .header-container {
+      padding: 0 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      padding: 0 16px; /* Matches px-4 (16px) */
+    }
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    transition: opacity 0.2s ease;
+  }
+
+  .logo-link:hover {
+    opacity: 0.8;
+  }
+
+  .logo-img {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+  }
+
+  .logo-text {
+    font-family: var(--font-sans);
+  }
+
+  .logo-subtext {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.6;
+    margin-left: 8px;
+    padding-left: 8px;
+    border-left: 1px solid var(--color-border);
+  }
+
+  /* Center Menu: Embedded Product Tabs */
+  .desktop-nav {
+    display: flex;
+    gap: 40px; /* Aligned to support portal gap-10 (40px) */
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .desktop-nav {
+      display: none;
+    }
+  }
+
+  .nav-tab-btn {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em; /* Aligned to support portal tracking-wider (0.05em) */
+    color: var(--color-text-primary);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    padding: 4px 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .nav-tab-btn:hover {
+    opacity: 1;
+    color: var(--color-primary);
+  }
+
+  .nav-tab-btn.active {
+    opacity: 1;
+    color: var(--color-primary);
+    font-weight: 700;
+    background-color: transparent; /* Removed gray button pill background */
+  }
+
+  /* Right Action Area */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .header-actions {
+      display: none;
+    }
+  }
+
+  /* Search */
+  .search-form-container {
+    position: relative;
+    width: 180px;
+    transition: width 0.2s ease;
+  }
+
+  .search-form-container:focus-within {
+    width: 220px;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 6px 36px 6px 36px;
+    border-radius: 9999px;
+    font-size: 14px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-input-bg);
+    color: var(--color-text-primary);
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-primary);
+    background-color: var(--color-body-bg);
+  }
+
+  .kbd-shortcut {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  
+  [data-theme="dark"] .kbd-shortcut {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Lang Toggle Pill */
+  .lang-toggle-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: transparent; /* Removed bordered container background */
+    border: none; /* Removed border */
+    padding: 0;
+    font-size: 10px;
+    font-weight: 700;
+    margin: 0 8px; /* Matches mx-2 (8px) */
+  }
+
+  .lang-pill-btn {
+    padding: 4px 8px; /* Matches px-2 py-1 */
+    border-radius: 4px; /* Matches rounded (4px) */
+    color: var(--color-text-primary);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+  }
+
+  .lang-pill-btn:hover {
+    opacity: 1;
+    background-color: var(--color-secondary-bg);
+  }
+
+  .lang-pill-btn.active {
+    background-color: var(--color-primary);
+    color: #ffffff !important;
+    opacity: 1;
+  }
+
+  /* Theme Toggle Button */
+  .theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; /* Increased to match support portal circle size (48px) */
+    height: 48px;
+    border-radius: 50%;
+    color: var(--color-text-primary);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+  }
+
+  .theme-toggle-btn:hover {
+    background-color: var(--color-secondary-bg);
+    opacity: 1;
+  }
+
+  .theme-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    display: none;
+    color: var(--color-text-primary);
+    padding: 8px;
+    border-radius: 6px;
+    opacity: 0.8;
+  }
+
+  .mobile-menu-btn:hover {
+    background-color: var(--color-secondary-bg);
+    opacity: 1;
+  }
+
+  @media (max-width: 1024px) {
+    .mobile-menu-btn {
+      display: block;
+    }
+  }
+
+  .burger-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Mobile Menu Panel */
+  .mobile-menu-panel {
+    display: block;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-body-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 24px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-menu-panel.hidden {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mobile-nav-tab-btn {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    opacity: 0.8;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-align: left;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+  }
+
+  .mobile-nav-tab-btn:hover, .mobile-nav-tab-btn.active {
+    color: var(--color-primary);
+    background-color: var(--color-secondary-bg);
+    opacity: 1;
+  }
+
+  .mobile-actions-divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 8px 0;
+  }
+
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8px;
+  }
+</style>
+
+<script>
+  function setupHeader() {
+    const header = document.querySelector('[data-layout-header]');
+    if (!header) return;
+
+    // Mobile Menu Panel Toggle
+    const mobileBtn = header.querySelector('.mobile-menu-btn');
+    const mobilePanel = header.querySelector('.mobile-menu-panel');
+
+    if (mobileBtn && mobilePanel) {
+      mobileBtn.addEventListener('click', () => {
+        mobilePanel.classList.toggle('hidden');
+      });
+    }
+
+    // Theme Toggle Logic
+    const themeBtn = header.querySelector('#header-theme-toggle');
+    const mobileThemeBtn = header.querySelector('#mobile-theme-toggle');
+    
+    const sunIcon = header.querySelector('#header-sun-icon');
+    const moonIcon = header.querySelector('#header-moon-icon');
+    const mobileSunIcon = header.querySelector('#mobile-sun-icon');
+    const mobileMoonIcon = header.querySelector('#mobile-moon-icon');
+
+    const updateToggleIcons = (theme: string) => {
+      if (theme === 'dark') {
+        sunIcon?.classList.remove('hidden');
+        moonIcon?.classList.add('hidden');
+        mobileSunIcon?.classList.remove('hidden');
+        mobileMoonIcon?.classList.add('hidden');
+      } else {
+        sunIcon?.classList.add('hidden');
+        moonIcon?.classList.remove('hidden');
+        mobileSunIcon?.classList.add('hidden');
+        mobileMoonIcon?.classList.remove('hidden');
+      }
+    };
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    updateToggleIcons(currentTheme);
+
+    const toggleTheme = () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateToggleIcons(next);
+    };
+
+    themeBtn?.addEventListener('click', toggleTheme);
+    mobileThemeBtn?.addEventListener('click', toggleTheme);
+
+    // Header product tabs interaction with page panels
+    const tabButtons = header.querySelectorAll('[data-tab-target]');
+    
+    const syncActiveTab = (targetId: string) => {
+      // Update header states
+      tabButtons.forEach(btn => {
+        const isTarget = btn.getAttribute('data-tab-target') === targetId;
+        btn.classList.toggle('active', isTarget);
+      });
+
+      // Update page panels
+      const panels = document.querySelectorAll('.tab-panel');
+      if (panels.length > 0) {
+        panels.forEach(panel => {
+          const isTarget = panel.getAttribute('id') === `panel-${targetId}`;
+          panel.classList.toggle('hidden', !isTarget);
+        });
+      }
+      
+      // Update hash in URL quietly
+      if (history.pushState) {
+        history.pushState(null, '', `#${targetId}`);
+      } else {
+        window.location.hash = targetId;
+      }
+    };
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-tab-target');
+        if (targetId) {
+          syncActiveTab(targetId);
+          // Auto close mobile panel on click
+          if (mobilePanel && !mobilePanel.classList.contains('hidden')) {
+            mobilePanel.classList.add('hidden');
+          }
+        }
+      });
+    });
+
+    // Sync tab on initial page load based on URL hash
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash && ['p5', 'b3t3', 'dsk'].includes(initialHash)) {
+      syncActiveTab(initialHash);
+    }
+
+    // Keyboard shortcut '/' for search focus
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        const searchInput = header.querySelector('.search-input') as HTMLInputElement | null;
+        searchInput?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Clean up keydown listener on swaps if Astro transitions are used
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }, { once: true });
+  }
+
+  setupHeader();
+  document.addEventListener('astro:after-swap', setupHeader);
+</script>
