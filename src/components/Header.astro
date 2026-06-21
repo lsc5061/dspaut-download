@@ -228,69 +228,7 @@ const koHref = isKo
     }
   }
 
-  /* Search */
-  .search-form-container {
-    position: relative;
-    width: 180px;
-    transition: width 0.2s ease;
-  }
 
-  .search-form-container:focus-within {
-    width: 220px;
-  }
-
-  .search-input-wrapper {
-    position: relative;
-    width: 100%;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    color: var(--color-text-secondary);
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 6px 36px 6px 36px;
-    border-radius: 9999px;
-    font-size: 14px;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-input-bg);
-    color: var(--color-text-primary);
-    outline: none;
-    transition: all 0.2s ease;
-  }
-
-  .search-input:focus {
-    border-color: var(--color-primary);
-    background-color: var(--color-body-bg);
-  }
-
-  .kbd-shortcut {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.05);
-    border: none;
-    border-radius: 4px;
-    padding: 1px 6px;
-    font-size: 10px;
-    color: var(--color-text-secondary);
-    opacity: 0.4;
-    pointer-events: none;
-  }
-  
-  [data-theme="dark"] .kbd-shortcut {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
 
   /* Lang Toggle Pill */
   .lang-toggle-pill {
