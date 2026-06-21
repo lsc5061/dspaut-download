@@ -41,21 +41,7 @@ const koHref = isKo
     
     <!-- Right side controls (Search bar, Language Switch Pill, Theme Toggle) -->
     <div class="header-actions">
-      <!-- Search Input -->
-      <form action={`${supportUrl}${isKo ? '/ko/manual/' : '/manual/'}`} method="GET" class="search-form-container">
-        <div class="search-input-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input 
-            type="text" 
-            name="q"
-            placeholder={isKo ? "검색..." : "Search..."}
-            class="search-input"
-          />
-          <kbd class="kbd-shortcut">/</kbd>
-        </div>
-      </form>
+
 
       <!-- Language Switch (Pill Button Group) -->
       <div class="lang-toggle-pill">
@@ -94,21 +80,7 @@ const koHref = isKo
       
       <div class="mobile-actions-divider"></div>
       
-      <!-- Mobile Search -->
-      <form action={`${supportUrl}${isKo ? '/ko/manual/' : '/manual/'}`} method="GET" class="search-form-container" style="width: 100%; margin-bottom: 12px;">
-        <div class="search-input-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input 
-            type="text" 
-            name="q"
-            placeholder={isKo ? "검색..." : "Search..."}
-            class="search-input"
-            style="width: 100%;"
-          />
-        </div>
-      </form>
+
 
       <div class="mobile-actions">
         <!-- Lang switcher -->
@@ -560,21 +532,7 @@ const koHref = isKo
       syncActiveTab(initialHash);
     }
 
-    // Keyboard shortcut '/' for search focus
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        const searchInput = header.querySelector('.search-input') as HTMLInputElement | null;
-        searchInput?.focus();
-      }
-    };
 
-    window.addEventListener('keydown', handleKeyDown);
-    
-    // Clean up keydown listener on swaps if Astro transitions are used
-    document.addEventListener('astro:before-swap', () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    }, { once: true });
   }
 
   setupHeader();
