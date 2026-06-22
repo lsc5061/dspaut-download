@@ -78,27 +78,6 @@ const koHref = isKo
       <button class="mobile-nav-tab-btn" data-tab-target="b3t3">B3 / T3</button>
       <button class="mobile-nav-tab-btn" data-tab-target="dsk">DSK (SDK)</button>
       
-      <div class="mobile-actions-divider"></div>
-      
-
-
-      <div class="mobile-actions">
-        <!-- Lang switcher -->
-        <div class="lang-toggle-pill">
-          <a href={enHref} class={`lang-pill-btn ${!isKo ? 'active' : ''}`}>EN</a>
-          <a href={koHref} class={`lang-pill-btn ${isKo ? 'active' : ''}`}>KO</a>
-        </div>
-
-        <!-- Theme switch -->
-        <button id="mobile-theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-          <svg id="mobile-sun-icon" class="theme-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
-          </svg>
-          <svg id="mobile-moon-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
-      </div>
     </nav>
   </div>
 </header>
@@ -177,6 +156,12 @@ const koHref = isKo
     border-left: 1px solid var(--color-border);
   }
 
+  @media (max-width: 640px) {
+    .logo-subtext {
+      display: none;
+    }
+  }
+
   /* Center Menu: Embedded Product Tabs */
   .desktop-nav {
     display: flex;
@@ -224,7 +209,8 @@ const koHref = isKo
 
   @media (max-width: 1024px) {
     .header-actions {
-      display: none;
+      margin-left: auto;
+      margin-right: 8px;
     }
   }
 
@@ -267,12 +253,19 @@ const koHref = isKo
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px; /* Increased to match support portal circle size (48px) */
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     color: var(--color-text-primary);
     opacity: 0.8;
     transition: all 0.2s ease;
+  }
+
+  @media (min-width: 1025px) {
+    .theme-toggle-btn {
+      width: 48px;
+      height: 48px;
+    }
   }
 
   .theme-toggle-btn:hover {
@@ -358,18 +351,7 @@ const koHref = isKo
     opacity: 1;
   }
 
-  .mobile-actions-divider {
-    height: 1px;
-    background-color: var(--color-border);
-    margin: 8px 0;
-  }
-
-  .mobile-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 8px;
-  }
+  /* Mobile actions CSS removed */
 </style>
 
 <script>
@@ -389,24 +371,16 @@ const koHref = isKo
 
     // Theme Toggle Logic
     const themeBtn = header.querySelector('#header-theme-toggle');
-    const mobileThemeBtn = header.querySelector('#mobile-theme-toggle');
-    
     const sunIcon = header.querySelector('#header-sun-icon');
     const moonIcon = header.querySelector('#header-moon-icon');
-    const mobileSunIcon = header.querySelector('#mobile-sun-icon');
-    const mobileMoonIcon = header.querySelector('#mobile-moon-icon');
 
     const updateToggleIcons = (theme: string) => {
       if (theme === 'dark') {
         sunIcon?.classList.remove('hidden');
         moonIcon?.classList.add('hidden');
-        mobileSunIcon?.classList.remove('hidden');
-        mobileMoonIcon?.classList.add('hidden');
       } else {
         sunIcon?.classList.add('hidden');
         moonIcon?.classList.remove('hidden');
-        mobileSunIcon?.classList.add('hidden');
-        mobileMoonIcon?.classList.remove('hidden');
       }
     };
 
@@ -422,7 +396,6 @@ const koHref = isKo
     };
 
     themeBtn?.addEventListener('click', toggleTheme);
-    mobileThemeBtn?.addEventListener('click', toggleTheme);
 
     // Header product tabs interaction with page panels
     const tabButtons = header.querySelectorAll('[data-tab-target]');
