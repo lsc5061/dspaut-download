@@ -91,7 +91,8 @@
     "os": "Linux Embedded OS (B3/T3)",
     "fileSize": "53.6 MB",
     "downloadUrl": "https://github.com/lsc5061/dspaut-download/releases/download/v1.0.0/DSVision_CM5_Ver_3_0_5_2026-04-02-10-14.tar.xz",
-    "manualUrl": "/assets/docs/B3_T3_Update_Guide_v1.0.pdf",
+    "manualUrlEn": "https://support.dspaut.com/en/docs/equipment_manual/deepsound_b3/cm5_install_manual/",
+    "manualUrlKo": "https://support.dspaut.com/ko/docs/equipment_manual/deepsound_b3/cm5_install_manual/",
     "installationStepsKo": [
       "리눅스 시스템 업데이트 파일(.zip 또는 .tar.gz)을 다운로드합니다.",
       "다운로드한 파일을 압축 해제하지 않고 USB 메모리에 그대로 저장합니다.",
