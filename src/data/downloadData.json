@@ -11,6 +11,8 @@
     "fileSize": "38.4 MB",
     "downloadUrl": "https://github.com/lsc5061/dspaut-download/releases/download/v1.0.0/DSVision_setup_Ver_3_0_5.2026-04-02-10-14.exe",
     "manualUrl": "/assets/docs/DSViewer_Manual_v2.pdf",
+    "manualUrlEn": "https://support.dspaut.com/en/docs/equipment_manual/deepsound_p5/p5_install_manual/",
+    "manualUrlKo": "https://support.dspaut.com/ko/docs/equipment_manual/deepsound_p5/p5_install_manual/",
     "installationStepsKo": [
       "최신 설치 파일(.exe 또는 .zip)을 PC에 다운로드합니다.",
       "다운로드한 파일의 압축을 완전히 해제합니다.",
