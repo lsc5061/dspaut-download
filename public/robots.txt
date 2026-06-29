@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://download.dspaut.com/sitemap-index.xml
